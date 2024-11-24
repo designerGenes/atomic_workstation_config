@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Created by newuser for 5.9
 export ZPLUG_HOME="$HOME/.zplug"
 source $ZPLUG_HOME/init.zsh
@@ -27,14 +34,14 @@ autoload -U compinit && compinit
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # Custom Aliases
 alias gs='git status'
-export ZSHRC="/users/jadennation/.zshrc"
+export ZSHRC="$HOME/.zshrc"
 alias rezsh='source "$ZSHRC" && echo reloaded ZSH' 
 alias vimZ='vim "$ZSHRC"'
 alias vimVim="vim ~/.vimrc"
 export TERM=xterm-256color
 
 source $HOME/dev/bin/aliases.sh
-source $HOME/dev/bin/deepdeletefunc.sh
+source $HOME/dev/bin/funcs.sh
 source $HOME/dev/bin/customPath.sh
 
 HISTFILE=$HOME/.zsh_history
@@ -57,3 +64,7 @@ fc -R
 # Bind UP and DOWN arrows for history substring search
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
+export PYENV_ROOT="$HOME/.pyenv"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+fi
